@@ -1,59 +1,47 @@
-# P01
+# 🚀 Sistema Milhão - Gestão & Inteligência para Barbearias
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3.
+O **Sistema Milhão** é uma plataforma SaaS Full Stack projetada para transformar barbearias em negócios lucrativos. O foco do projeto é unir a facilidade de agendamento com a **Análise de Dados Financeiros** em tempo real.
 
-## Development server
+---
 
-To start a local development server, run:
+## 💎 Funcionalidades de Elite
 
-```bash
-ng serve
-```
+### 📊 Dashboard Inteligente (Business Intelligence)
+- **Cálculo de Lucro Real:** Análise automatizada descontando custos operacionais (Margem de 70%).
+- **Ticket Médio Dinâmico:** Baseado nos preços reais cadastrados no banco de dados.
+- **Projeção de Faturamento:** Visualização clara do desempenho mensal para tomada de decisão.
+- **Gráficos de Desempenho:** Monitoramento dos últimos 7 dias via Chart.js.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 🌐 Vitrine Online (Public Profile)
+- **Link Personalizado:** Ex: `sistemamilhao.com/perfil/joao`.
+- **Foco em Conversão:** Design Neon/Dark otimizado para mobile (Instagram).
+- **Botão Direct-to-WhatsApp:** Agendamento rápido sem atrito para o cliente.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠️ Stack Tecnológica
 
-```bash
-ng generate component component-name
-```
+- **Frontend:** Angular 17+ (Signals & Control Flow), TypeScript, Chart.js.
+- **Backend:** Java 17, Spring Boot, Spring Security.
+- **Banco de Dados:** MySQL.
+- **DevOps:** Git/GitHub.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🚀 Como rodar o projeto
 
-## Building
+1. **Backend:**
+   - Configure o MySQL com as credenciais no `application.properties`.
+   - Execute `./mvnw spring-boot:run`.
 
-To build the project run:
+2. **Frontend:**
+   - Instale as dependências: `npm install`.
+   - Inicie o servidor: `ng serve`.
+   - Acesse: `http://localhost:4200`.
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🎓 Sobre o Projeto
+Desenvolvido como parte do programa de Iniciação Científica **PICTA 2026** no **Senac University Center**. O objetivo é validar o impacto da análise de dados na sobrevivência de microempresas.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Autor:** [Yago Santos Silva](https://www.linkedin.com/in/yago-santos-silva-aa3233245)
