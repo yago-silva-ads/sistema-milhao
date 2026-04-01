@@ -1,0 +1,64 @@
+<div class="dashboard-container">
+  <header class="dash-header">
+    <div class="logo">🚀 Sistema <span>Milhão</span></div>
+    <button (click)="logout()" class="btn-sair">Sair</button>
+  </header>
+
+  <main class="dash-content">
+    <div class="welcome-box">
+      <h3>Fala, {{ nomeUsuario && nomeUsuario !== 'Carregando...' ? nomeUsuario : 'Chefe' }}! 🚀</h3>
+      <p>Sua conta está ativa no ecossistema de elite do Sistema Milhão.</p>
+    </div>
+
+    <div *ngIf="statusPagamento === 'ATIVO'">
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <h4>Faturamento Estimado</h4>
+          <p class="value">{{ faturamentoMensal | currency:'BRL' }}</p>
+          <span style="color: #00ff88">+12% de projeção</span>
+        </div>
+
+        <div class="metric-card">
+          <h4>Ticket Médio</h4>
+          <p class="value">{{ ticketMedio | currency:'BRL' }}</p>
+          <small>Baseado no seu preço base</small>
+        </div>
+
+        <div class="metric-card">
+          <h4>Lucro Real Estimado</h4>
+          <p class="value" style="color: #00ff88">{{ lucroEstimado | currency:'BRL' }}</p>
+          <small>Margem de segurança aplicada</small>
+        </div>
+      </div>
+
+      <div class="chart-section">
+        <h3>Desempenho da Barbearia (Últimos 7 dias)</h3>
+        <canvas id="meuGrafico"></canvas>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h4>Sua Vitrine Online 🌐</h4>
+          <div class="link-box">
+            <p class="neon-text" *ngIf="nomeUsuario !== 'Carregando...'">
+              sistemamilhao.com/perfil/{{ nomeUsuario.split(' ').join('').toLowerCase() }}
+            </p>
+            <button class="btn-copy" (click)="copiarLink()">📋</button>
+          </div>
+          <p style="font-size: 0.8rem; color: #8b949e; margin-top: 10px;">
+            Compartilhe esse link no seu Instagram.
+          </p>
+        </div>
+
+        <div class="stat-card">
+          <h4>Últimos Clientes 💈</h4>
+          <ul class="client-list">
+            <li><span>Marcos - Degradê</span> <span>14:00</span></li>
+            <li><span>Felipe - Barba</span> <span>15:30</span></li>
+          </ul>
+          <button class="btn-neon">Ver Agenda Completa</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

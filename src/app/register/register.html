@@ -1,0 +1,172 @@
+<section class="hero-section">
+  <div class="hero-container">
+    <div class="hero-content">
+      <h1 class="hero-title">🚀 Sistema Milhão</h1>
+
+      <p class="hero-subtitle">Complete sua vaga e comece a faturar agora.</p>
+    </div>
+
+    <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="glassmorphism-form">
+      <div class="form-header">
+        <h2>Seu Perfil de Elite</h2>
+        <p>Ajuste os dados que seus futuros clientes vão ver no WhatsApp.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="nome">Nome do Profissional</label>
+        <input
+          id="nome"
+          type="text"
+          formControlName="nome"
+          placeholder="Seu Nome Completo"
+          class="form-input"
+          (input)="limparTexto($event)"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail de Acesso</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="seu@email.com"
+          class="form-input"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="servico">Tipo de Serviço</label>
+        <input
+          id="servico"
+          type="text"
+          formControlName="servico"
+          placeholder="Ex: Barbeiro, Encanador, Coach"
+          class="form-input"
+          (input)="limparTexto($event)"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="preco">Valor do Serviço (R$)</label>
+        <input
+          id="preco"
+          type="number"
+          formControlName="preco"
+          placeholder="0.00"
+          class="form-input"
+          min="0"
+          step="0.01"
+          onkeypress="
+            return (
+              (event.charCode >= 48 && event.charCode <= 57) ||
+              event.charCode == 44 ||
+              event.charCode == 46
+            );
+          "
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="linkWhatsapp">WhatsApp (Somente Números, com DDD)</label>
+        <input
+          id="linkWhatsapp"
+          type="tel"
+          formControlName="linkWhatsapp"
+          placeholder="11999999999"
+          class="form-input"
+          maxlength="11"
+          onkeypress="return event.charCode >= 48 && event.charCode <= 57;"
+        />
+        @if (
+          cadastroForm.get('linkWhatsapp')?.invalid && cadastroForm.get('linkWhatsapp')?.touched
+        ) {
+          <small style="color: #ef4444; margin-top: 5px; display: block">
+            Apenas números (DDD + Telefone). Sem traços ou espaços.
+          </small>
+        }
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="!cadastroForm.valid"
+        [style.opacity]="!cadastroForm.valid ? '0.5' : '1'"
+      >
+        GARANTIR MINHA VAGA AGORA
+      </button>
+    </form>
+  </div>
+</section>
+
+<section class="dashboard-section">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h2>Profissionais do Sistema</h2>
+      <p>Veja quem já está aproveitando as oportunidades</p>
+    </div>
+
+    <div class="professionals-grid">
+      @for (item of listaDeMetas; track item.id) {
+        <div class="professional-card">
+          <div class="card-header">
+            <h3>{{ item.nome }}</h3>
+            <button class="btn-delete" (click)="excluir(item.id)" title="Remover">✕</button>
+          </div>
+
+          <div class="card-body">
+            <div class="info-item">
+              <span class="label">Serviço</span>
+              <span class="value">{{ item.servico }}</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Investimento</span>
+              <span class="value price">{{ item.preco | currency: 'BRL' }}</span>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <a [href]="'https://wa.me/' + item.linkWhatsapp" target="_blank" class="btn-contact"
+              >Contatar no WhatsApp</a
+            >
+          </div>
+        </div>
+      } @empty {
+        <div class="empty-state">
+          <div class="empty-icon">🚀</div>
+          <p class="empty-title">Nenhum profissional ainda</p>
+          <p class="empty-text">Seja o primeiro a se cadastrar e começar a lucrar!</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<footer class="footer-premium">
+  <div class="footer-content">
+    <div class="footer-col">
+      <h3>🚀 Sistema Milhão</h3>
+      <p>Conectando profissionais de elite a clientes reais.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Links Úteis</h4>
+      <ul>
+        <li><a href="#">Termos de Uso</a></li>
+        <li><a href="#">Política de Privacidade</a></li>
+        <li><a href="#">Ajuda</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Segurança Garantida</h4>
+      <div class="badges">
+        <span class="badge ssl">🔒 SSL 256-bit</span>
+        <span class="badge google">🛡️ Google Verified</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright">
+    <p>© 2026 Sistema Milhão. Todos os direitos reservados.</p>
+  </div>
+</footer>

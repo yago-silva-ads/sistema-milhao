@@ -1,0 +1,108 @@
+.login-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+.login-container {
+    width: 350px;
+    margin: 80px auto;
+    padding: 40px;
+    background-color: var(--card-dark);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra pra dar profundidade */
+    text-align: center;
+}
+
+h2 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    color: #8b949e; /* Cinza claro pros labels */
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    padding: 12px;
+    color: white;
+    border-radius: 6px;
+    box-sizing: border-box; /* Pra não passar da largura */
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--neon-green);
+    box-shadow: 0 0 5px var(--neon-green);
+}
+
+/* O BOTÃO NEON COM EFEITO AO PASSAR O MOUSE */
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--neon-green);
+    color: #0b0e14;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s ease; /* Transição suave */
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: var(--neon-text);
+    box-shadow: 0 0 20px var(--neon-text); /* O brilho neon aqui! */
+    transform: translateY(-2px); /* Ele dá uma subidinha */
+}
+
+a {
+    color: var(--neon-green);
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    margin-top: 15px;
+}

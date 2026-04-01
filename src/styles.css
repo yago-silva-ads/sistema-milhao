@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --background-dark: #0b0e14; /* Azul quase preto do seu print */
+  --card-dark: #161b22;       /* Fundo do formulário */
+  --neon-green: #28a745;     /* O verde do botão */
+  --neon-text: #39ff14;      /* Verde neon para o brilho */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-dark);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

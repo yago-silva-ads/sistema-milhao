@@ -1,0 +1,54 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Notebook Gamer",
+      "descricao": "Notebook com placa de vídeo dedicada e processador Intel i7",
+      "preco": 7500.00,
+      "estoque": 10
+    },
+    {
+      "id": 2,
+      "nome": "Mouse sem fio",
+      "descricao": "Mouse ergonômico com conexão Bluetooth e USB",
+      "preco": 150.00,
+      "estoque": 25
+    },
+    {
+      "id": 3,
+      "nome": "Teclado Mecânico",
+      "descricao": "Teclado RGB com switches mecânicos",
+      "preco": 450.00,
+      "estoque": 15
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "João Silva",
+      "email": "joao.silva@email.com",
+      "senha": "123456"
+    },
+    {
+      "id": 2,
+      "nome": "Maria Oliveira",
+      "email": "maria.oliveira@email.com",
+      "senha": "senha123"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": 1,
+      "usuarioId": 1,
+      "data": "2024-10-30",
+      "itens": [
+        { "produtoId": 1, "quantidade": 1 },
+        { "produtoId": 3, "quantidade": 2 }
+      ],
+      "total": 8400.00
+    }
+  ]
+}
+
+
+

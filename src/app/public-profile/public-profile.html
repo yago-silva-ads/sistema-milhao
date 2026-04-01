@@ -1,0 +1,34 @@
+<div class="public-container">
+  @if (profissional) {
+    <div class="profile-card">
+      <div class="header-visual"></div>
+
+      <div class="info">
+        <h1>{{ profissional.nome }}</h1>
+        <p class="specialty">{{ profissional.servico || 'Profissional de Elite' }} 💈</p>
+
+        <div class="price-badge">
+          <span>Corte a partir de</span>
+          <h2>{{ profissional.preco | currency: 'BRL' }}</h2>
+        </div>
+
+        <p class="bio">
+          Especialista em serviços de alta qualidade. Agende agora sua transformação com o Sistema
+          Milhão!
+        </p>
+
+        <button (click)="irParaWhatsApp()" class="btn-whatsapp">
+          <span class="btn-subtitle">🚀 Fale comigo</span>
+          <span class="btn-title">Agendar pelo WhatsApp agora!</span>
+        </button>
+      </div>
+    </div>
+
+    <footer class="footer">Powered by <span>Sistema Milhão</span> 🚀</footer>
+  } @else {
+    <div class="loading-screen">
+      <div class="spinner"></div>
+      <p>Buscando perfil de elite...</p>
+    </div>
+  }
+</div>

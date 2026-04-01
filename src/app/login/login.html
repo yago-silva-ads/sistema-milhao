@@ -1,0 +1,15 @@
+<div class="login-container">
+  <h2>Acesso ao Sistema</h2>
+  
+  <div class="form-group">
+    <label>Login (Email):</label>
+    <input type="text" [(ngModel)]="dadosLogin.login" placeholder="Digite seu login">
+  </div>
+
+  <div class="form-group">
+    <label>Senha:</label>
+    <input type="password" [(ngModel)]="dadosLogin.senha" placeholder="Digite sua senha">
+  </div>
+
+  <button (click)="entrar()">ENTRAR</button>
+</div>
