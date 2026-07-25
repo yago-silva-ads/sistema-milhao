@@ -1,7 +1,7 @@
 {
   "version": 2,
   "buildCommand": "ng build --configuration production",
-  "outputDirectory": "dist/sistema-milhao-front/browser",
+  "outputDirectory": "dist/p01/browser",
   "framework": "angular",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
