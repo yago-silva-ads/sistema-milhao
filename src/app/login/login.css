@@ -1,108 +1,282 @@
-.login-container {
-    width: 300px;
-    margin: 100px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+/* ============================================
+   LOGIN — PREMIUM DESIGN
+   Sistema Milhão — Amazon Quick
+   ============================================ */
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0f;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
 }
 
-input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.glow-blob-purple {
+  position: fixed;
+  top: -150px;
+  right: -150px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 4px;
+.glow-blob-green {
+  position: fixed;
+  bottom: -150px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,255,135,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
 }
 
-button:hover {
-    background-color: #218838;
-}
-.login-container {
-    width: 350px;
-    margin: 80px auto;
-    padding: 40px;
-    background-color: var(--card-dark);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra pra dar profundidade */
-    text-align: center;
-}
-
-h2 {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 30px;
-    font-weight: 600;
+/* Card */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 48px 36px;
+  position: relative;
+  z-index: 10;
+  animation: fadeInUp 0.6s ease;
 }
 
+/* Header */
+.login-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.logo-mark {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,255,135,0.08);
+  border: 1px solid rgba(0,255,135,0.2);
+  border-radius: 16px;
+  font-size: 28px;
+  color: #00FF87;
+}
+
+.login-header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #00FF87, #7C3AED);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.85rem;
+}
+
+/* Form */
 .form-group {
-    margin-bottom: 20px;
-    text-align: left;
+  margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    font-size: 12px;
-    color: #8b949e; /* Cinza claro pros labels */
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    font-weight: bold;
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-input {
-    width: 100%;
-    background-color: #0d1117;
-    border: 1px solid #30363d;
-    padding: 12px;
-    color: white;
-    border-radius: 6px;
-    box-sizing: border-box; /* Pra não passar da largura */
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 0 16px;
+  transition: all 0.3s ease;
 }
 
-input:focus {
-    outline: none;
-    border-color: var(--neon-green);
-    box-shadow: 0 0 5px var(--neon-green);
+.input-with-icon:focus-within {
+  border-color: rgba(0,255,135,0.5);
+  box-shadow: 0 0 0 3px rgba(0,255,135,0.08);
+  background: rgba(0,255,135,0.02);
 }
 
-/* O BOTÃO NEON COM EFEITO AO PASSAR O MOUSE */
-button {
-    width: 100%;
-    padding: 15px;
-    background-color: var(--neon-green);
-    color: #0b0e14;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.3s ease; /* Transição suave */
-    margin-top: 20px;
+.input-with-icon i {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.3);
+  margin-right: 12px;
 }
 
-button:hover {
-    background-color: var(--neon-text);
-    box-shadow: 0 0 20px var(--neon-text); /* O brilho neon aqui! */
-    transform: translateY(-2px); /* Ele dá uma subidinha */
+.input-with-icon:focus-within i {
+  color: #00FF87;
 }
 
-a {
-    color: var(--neon-green);
-    text-decoration: none;
-    font-size: 14px;
-    display: block;
-    margin-top: 15px;
+.input-with-icon input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 14px 0;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.input-with-icon input::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+
+/* Button */
+.btn-enter {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #00FF87, #00CC6A);
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,255,135,0.25);
+  transition: all 0.3s ease;
+}
+.btn-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,255,135,0.4);
+}
+.btn-enter:active {
+  transform: translateY(0);
+}
+
+/* Footer */
+.login-footer {
+  text-align: center;
+  margin-top: 24px;
+}
+.login-footer p {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.85rem;
+}
+.login-footer a {
+  color: #00FF87;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.login-footer a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0a0a0f;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.loading-logo {
+  font-size: 56px;
+  color: #00FF87;
+  animation: pulse 1.5s ease infinite;
+  margin-bottom: 20px;
+}
+
+.loading-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.loading-sub {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: 16px;
+}
+
+.loading-bar {
+  width: 180px;
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00FF87, #7C3AED);
+  border-radius: 4px;
+  animation: fillBar 2s ease forwards;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.7; }
+}
+
+@keyframes fillBar {
+  0% { width: 0%; }
+  50% { width: 60%; }
+  100% { width: 100%; }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 36px 24px;
+    border-radius: 20px;
+  }
+  .login-header h1 {
+    font-size: 1.4rem;
+  }
 }

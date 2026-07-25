@@ -1,17 +1,71 @@
-<div class="landing-container">
-  <div class="glow-circle"></div>
+<!-- =========================================
+   SISTEMA MILHÃO - LANDING PAGE
+========================================= -->
+<div class="landing-wrapper">
   
-  <nav class="navbar">
-    <div class="logo">🚀 Sistema Milhão</div>
-    <button routerLink="/register" class="btn-login">Entrar</button>
-  </nav>
+  <!-- Glow Backgrounds (Iluminação ambiente) -->
+  <div class="ambient-glow glow-top-right"></div>
+  <div class="ambient-glow glow-bottom-left"></div>
 
-  <main class="hero-section">
-    <h1 class="title">Sua Agenda Lotada e <br><span class="neon-text">Lucro no Bolso.</span></h1>
-    <p class="subtitle">O sistema definitivo para profissionais de elite gerenciarem serviços, preços e clientes direto pelo WhatsApp.</p>
-    
-    <div class="action-buttons">
-      <button routerLink="/register" class="btn-neon">Testar Grátis Agora</button>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="brand">
+      <i class="ph-fill ph-rocket-launch logo-icon"></i>
+      <span>Sistema Milhão</span>
+    </div>
+    <div class="nav-actions">
+      <a routerLink="/login" class="nav-link">Já tem conta?</a>
+      <button routerLink="/register" class="btn-primary-outline">Criar Conta Grátis</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="hero">
+    <div class="hero-content">
+      <div class="badge">🚀 O SaaS Definitivo para Profissionais</div>
+      <h1 class="hero-title">
+        Sua Agenda Lotada e<br>
+        <span class="gradient-text">Lucro no Bolso.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Gerencie serviços, preços e clientes direto pelo WhatsApp. 
+        Transforme seu perfil em uma máquina de vendas premium.
+      </p>
+      
+      <div class="hero-cta">
+        <button routerLink="/register" class="btn-primary-solid">
+          COMEÇAR GRÁTIS
+          <i class="ph-bold ph-arrow-right"></i>
+        </button>
+        <span class="trust-text"><i class="ph-fill ph-shield-check"></i> Sem cartão de crédito</span>
+      </div>
     </div>
   </main>
+
+  <!-- Benefícios Section -->
+  <section class="features">
+    <div class="feature-card glass-card">
+      <div class="feature-icon"><i class="ph-duotone ph-whatsapp-logo"></i></div>
+      <h3>Agendamento Fácil</h3>
+      <p>Seus clientes marcam horário com você diretamente pelo WhatsApp em poucos cliques.</p>
+    </div>
+
+    <div class="feature-card glass-card">
+      <div class="feature-icon"><i class="ph-duotone ph-chart-line-up"></i></div>
+      <h3>Controle Total</h3>
+      <p>Acompanhe seu faturamento, ticket médio e clientes através de um dashboard intuitivo.</p>
+    </div>
+
+    <div class="feature-card glass-card">
+      <div class="feature-icon"><i class="ph-duotone ph-link"></i></div>
+      <h3>Perfil Premium</h3>
+      <p>Seu próprio link online profissional mostrando seus serviços, preços e portfólio.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 Sistema Milhão. Construído para profissionais de elite.</p>
+  </footer>
+
 </div>

@@ -31,13 +31,33 @@ export class VerifyComponent implements OnInit {
     this.metaService.verificarCodigo(this.email, this.codigoInput).subscribe({
       next: (res) => {
         localStorage.setItem('user_email', this.email);
-
-        alert('🏆 BRABO! Seu acesso foi liberado.');
-        this.router.navigate(['/dashboard']);
+        this.showToast('success', '🏆 BRABO!', 'Seu acesso foi liberado. Redirecionando...');
+        
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 1500);
       },
       error: (err) => {
-        alert('❌ Código incorreto!');
+        this.showToast('error', '❌ Código incorreto', 'Verifique o código enviado no seu e-mail.');
       },
     });
+  }
+
+  private showToast(type: 'success' | 'error', title: string, subtitle: string) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+      <span class="toast-icon">${type === 'success' ? '✓' : '✗'}</span>
+      <div class="toast-message">
+        <div class="toast-title">${title}</div>
+        <div class="toast-subtitle">${subtitle}</div>
+      </div>
+    `;
+    container.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 4000);
   }
 }

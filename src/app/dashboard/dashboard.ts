@@ -1,7 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Meta } from '../services/meta';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -19,11 +21,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   lucroEstimado: number = 0;
   private chartInstance: Chart | undefined;
 
-  statusPagamento: string = 'ATIVO';
+  statusPagamento: string = 'PENDENTE';
   nomeUsuario: string = '...';
 
   constructor(
     private metaService: Meta,
+    private http: HttpClient,
     private router: Router,
   ) {}
 
@@ -46,30 +49,23 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   carregarDadosDoPerfil(email: string) {
     this.metaService.getMetas().subscribe({
       next: (profissionais) => {
-        // Procura você no banco
         const eu = profissionais.find((p) => p.email === email);
 
         if (eu) {
           this.statusPagamento = eu.statusPagamento;
           this.nomeUsuario = eu.nome;
 
-          // --- LÓGICA DE ANÁLISE DE DADOS ---
-          // Pegamos o preço que você cadastrou no banco (ex: R$ 25,00)
           const precoBase = eu.preco || 0;
-
-          // Simulamos 30 serviços no mês para o MVP
           const qtdServicos = 30;
 
           this.faturamentoMensal = precoBase * qtdServicos;
           this.ticketMedio = precoBase;
 
-          // Lucro Real: Faturamento menos 30% de custos (lâminas, energia, aluguel)
           const taxaCusto = 0.3;
           this.lucroEstimado = this.faturamentoMensal * (1 - taxaCusto);
 
-          // Dispara o gráfico se estiver ativo
           if (this.statusPagamento === 'ATIVO') {
-            setTimeout(() => this.renderizarGrafico(), 150);
+            setTimeout(() => this.renderizarGrafico(), 200);
           }
         }
       },
@@ -85,6 +81,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.chartInstance.destroy();
     }
 
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Gradiente verde premium
+    const gradient = ctx.createLinearGradient(0, 0, 0, 280);
+    gradient.addColorStop(0, 'rgba(0, 255, 135, 0.8)');
+    gradient.addColorStop(1, 'rgba(0, 255, 135, 0.1)');
+
     this.chartInstance = new Chart(canvas, {
       type: 'bar',
       data: {
@@ -92,10 +96,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         datasets: [
           {
             label: 'Faturamento R$',
-            data: [1200, 1900, 1500, 2200, 1800, 2500, 2100], // Dados fixos para o PICTA
-            backgroundColor: '#00ff88', // Verde Neon do Sistema Milhão
+            data: [1200, 1900, 1500, 2200, 1800, 2500, 2100],
+            backgroundColor: gradient,
             borderRadius: 8,
-            hoverBackgroundColor: '#00cc6a',
+            borderSkipped: false,
+            hoverBackgroundColor: '#00FF87',
           },
         ],
       },
@@ -104,16 +109,31 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(10,10,15,0.95)',
+            borderColor: 'rgba(0,255,135,0.3)',
+            borderWidth: 1,
+            titleColor: '#fff',
+            bodyColor: '#00FF87',
+            padding: 12,
+            cornerRadius: 8,
+            displayColors: false,
+            callbacks: {
+              label: (ctx: any) => `R$ ${ctx.raw.toLocaleString('pt-BR')}`,
+            }
+          }
         },
         scales: {
           y: {
             beginAtZero: true,
-            grid: { color: '#30363d' },
-            ticks: { color: '#8b949e' },
+            grid: { color: 'rgba(255,255,255,0.04)' },
+            ticks: { color: 'rgba(255,255,255,0.3)', font: { size: 11 } },
+            border: { display: false },
           },
           x: {
             grid: { display: false },
-            ticks: { color: '#8b949e' },
+            ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 12 } },
+            border: { display: false },
           },
         },
       },
@@ -132,10 +152,50 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     navigator.clipboard
       .writeText(link)
       .then(() => {
-        alert('📋 Link copiado com sucesso! Agora é só mandar pros clientes.');
+        this.showToast('success', '📋 Link copiado!', 'Agora é só mandar pros clientes.');
       })
       .catch((err) => {
         console.error('Erro ao copiar link:', err);
+        this.showToast('error', '❌ Erro', 'Não foi possível copiar o link.');
       });
+  }
+
+  ativarPlano() {
+    const email = localStorage.getItem('user_email');
+    if (!email) return;
+
+    this.showToast('success', '⏳ Redirecionando...', 'Aguarde, estamos preparando o checkout.');
+
+    this.http.post<any>(`${environment.apiUrl}/pagamento/criar-assinatura`, {
+      email: email,
+      nome: this.nomeUsuario
+    }).subscribe({
+      next: (res) => {
+        // Redireciona para o checkout do Mercado Pago
+        window.location.href = res.init_point;
+      },
+      error: (err) => {
+        console.error('Erro ao criar pagamento:', err);
+        this.showToast('error', '❌ Erro', 'Não foi possível iniciar o pagamento. Verifique se o backend está rodando.');
+      }
+    });
+  }
+
+  private showToast(type: 'success' | 'error', title: string, subtitle: string) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+      <span class="toast-icon">${type === 'success' ? '✓' : '✗'}</span>
+      <div class="toast-message">
+        <div class="toast-title">${title}</div>
+        <div class="toast-subtitle">${subtitle}</div>
+      </div>
+    `;
+    container.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 4000);
   }
 }

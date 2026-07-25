@@ -1,14 +1,27 @@
-<div class="login-container">
-  <h2>Validar Acesso</h2>
-  <p class="subtitle">Enviamos um código de 6 dígitos para o seu e-mail.</p>
-  
-  <div class="form-group">
-    <label>Código de Verificação</label>
-<input 
-  type="text" 
-  [(ngModel)]="codigoInput" 
-  placeholder="000000" 
-  maxlength="6">
+<div class="toast-container" id="toastContainer"></div>
 
-<button (click)="validarAcesso()">LIBERAR MINHA VAGA</button>
+<div class="verify-wrapper">
+  
+  <div class="glow-blob-purple" style="top: -100px; right: -100px;"></div>
+  <div class="glow-blob-green" style="bottom: -100px; left: -100px;"></div>
+
+  <div class="glass-card verify-card">
+    <div class="verify-header">
+      <i class="ph-fill ph-shield-check header-icon-green"></i>
+      <h2>Verificação de Email</h2>
+      <p class="subtitle">Digite o código de 6 dígitos enviado para seu email.</p>
+    </div>
+
+    <div class="form-group otp-group">
+      <input 
+        type="text" 
+        [(ngModel)]="codigoInput" 
+        placeholder="000000" 
+        maxlength="6"
+        class="otp-input"
+      >
+    </div>
+
+    <button class="btn-primary-solid btn-full" (click)="validarAcesso()">VERIFICAR</button>
+  </div>
 </div>

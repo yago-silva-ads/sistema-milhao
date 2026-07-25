@@ -1,93 +1,262 @@
-/* Fundo Dark */
-.landing-container {
-  min-height: 100vh;
-  background-color: #0d0d12;
-  color: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
+.landing-wrapper {
   position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Efeito de luz no fundo */
-.glow-circle {
+/* =========================================
+   GLOWS AMBIENTAIS (ILUMINAÇÃO DE FUNDO)
+   ========================================= */
+.ambient-glow {
   position: absolute;
-  top: -20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, rgba(0,0,0,0) 70%);
-  z-index: 0;
+  width: 60vw;
+  height: 60vw;
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -1;
+  opacity: 0.15;
 }
 
+.glow-top-right {
+  top: -20%;
+  right: -10%;
+  background: var(--accent-primary);
+}
+
+.glow-bottom-left {
+  bottom: -20%;
+  left: -10%;
+  background: var(--accent-secondary);
+}
+
+/* =========================================
+   NAVBAR
+   ========================================= */
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 20px 50px;
+  align-items: center;
+  padding: 24px 5%;
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
-.logo {
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text-main);
+}
+
+.logo-icon {
+  color: var(--accent-primary);
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
 }
 
-.btn-login {
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+}
+
+/* Botões */
+.btn-primary-outline {
   background: transparent;
-  color: #00ff88;
-  border: 1px solid #00ff88;
-  padding: 8px 20px;
-  border-radius: 5px;
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
-.btn-login:hover {
-  background: #00ff88;
-  color: #0d0d12;
+.btn-primary-outline:hover {
+  background: rgba(0, 255, 135, 0.1);
+  box-shadow: var(--shadow-glow);
 }
 
-.hero-section {
+.btn-primary-solid {
+  background: var(--btn-gradient);
+  color: var(--bg-dark);
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* =========================================
+   HERO SECTION
+   ========================================= */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 100px 20px;
-  position: relative;
-  z-index: 1;
+  padding: 80px 5% 40px;
+  z-index: 5;
 }
 
-.title {
-  font-size: 3.5rem;
-  line-height: 1.2;
-  margin-bottom: 20px;
+.hero-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.neon-text {
-  color: #00ff88;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5), 0 0 20px rgba(0, 255, 136, 0.3);
+.badge {
+  background: rgba(124, 58, 237, 0.15);
+  color: #bfa3ff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  border: 1px solid rgba(124, 58, 237, 0.3);
 }
 
-.subtitle {
-  font-size: 1.2rem;
-  color: #a0a0b0;
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.gradient-text {
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-muted);
   max-width: 600px;
   margin: 0 auto 40px;
 }
 
-.btn-neon {
-  background: #00ff88;
-  color: #000;
-  font-weight: bold;
-  font-size: 1.2rem;
-  padding: 15px 40px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-.btn-neon:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+.trust-text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.trust-text i {
+  color: var(--accent-primary);
+}
+
+/* =========================================
+   BENEFÍCIOS (FEATURES)
+   ========================================= */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  padding: 40px 5% 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 5;
+  position: relative;
+}
+
+.feature-card {
+  padding: 32px;
+  text-align: left;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: var(--accent-primary);
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer {
+  text-align: center;
+  padding: 40px 5%;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  z-index: 5;
+}
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================= */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .btn-primary-solid {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
 }

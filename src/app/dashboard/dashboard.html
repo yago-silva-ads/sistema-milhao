@@ -1,64 +1,226 @@
-<div class="dashboard-container">
-  <header class="dash-header">
-    <div class="logo">🚀 Sistema <span>Milhão</span></div>
-    <button (click)="logout()" class="btn-sair">Sair</button>
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="dashboard-wrapper">
+  
+  <div class="glow-blob-purple"></div>
+  <div class="glow-blob-green"></div>
+
+  <!-- Header Fixo Premium -->
+  <header class="dash-navbar">
+    <div class="brand">
+      <i class="ph-fill ph-crown logo-icon"></i>
+      <span>Sistema Milhão</span>
+    </div>
+    <div class="user-actions">
+      <div class="user-pill" *ngIf="nomeUsuario && nomeUsuario !== '...'">
+        <div class="user-avatar">{{ nomeUsuario.charAt(0).toUpperCase() }}</div>
+        <span class="user-name">{{ nomeUsuario.split(' ')[0] }}</span>
+      </div>
+      <button (click)="logout()" class="btn-logout"><i class="ph ph-sign-out"></i></button>
+    </div>
   </header>
 
   <main class="dash-content">
-    <div class="welcome-box">
-      <h3>Fala, {{ nomeUsuario && nomeUsuario !== 'Carregando...' ? nomeUsuario : 'Chefe' }}! 🚀</h3>
-      <p>Sua conta está ativa no ecossistema de elite do Sistema Milhão.</p>
-    </div>
-
-    <div *ngIf="statusPagamento === 'ATIVO'">
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <h4>Faturamento Estimado</h4>
-          <p class="value">{{ faturamentoMensal | currency:'BRL' }}</p>
-          <span style="color: #00ff88">+12% de projeção</span>
-        </div>
-
-        <div class="metric-card">
-          <h4>Ticket Médio</h4>
-          <p class="value">{{ ticketMedio | currency:'BRL' }}</p>
-          <small>Baseado no seu preço base</small>
-        </div>
-
-        <div class="metric-card">
-          <h4>Lucro Real Estimado</h4>
-          <p class="value" style="color: #00ff88">{{ lucroEstimado | currency:'BRL' }}</p>
-          <small>Margem de segurança aplicada</small>
-        </div>
+    
+    <!-- Welcome Section -->
+    <section class="welcome-section" *ngIf="nomeUsuario && nomeUsuario !== '...'">
+      <div class="welcome-text">
+        <h1>Olá, {{ nomeUsuario.split(' ')[0] }}! <span class="wave">👋</span></h1>
+        <p>Aqui está o resumo do seu negócio hoje.</p>
       </div>
-
-      <div class="chart-section">
-        <h3>Desempenho da Barbearia (Últimos 7 dias)</h3>
-        <canvas id="meuGrafico"></canvas>
+      <div class="welcome-actions">
+        <button class="btn-outline-green" (click)="copiarLink()">
+          <i class="ph ph-share-network"></i> Compartilhar Perfil
+        </button>
       </div>
+    </section>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <h4>Sua Vitrine Online 🌐</h4>
-          <div class="link-box">
-            <p class="neon-text" *ngIf="nomeUsuario !== 'Carregando...'">
-              sistemamilhao.com/perfil/{{ nomeUsuario.split(' ').join('').toLowerCase() }}
-            </p>
-            <button class="btn-copy" (click)="copiarLink()">📋</button>
+    <!-- Paywall - INATIVO -->
+    <section *ngIf="statusPagamento !== 'ATIVO'" class="paywall-section">
+      <div class="paywall-card">
+        <div class="paywall-left">
+          <div class="paywall-icon-wrap">
+            <i class="ph-fill ph-lock-key"></i>
           </div>
-          <p style="font-size: 0.8rem; color: #8b949e; margin-top: 10px;">
-            Compartilhe esse link no seu Instagram.
-          </p>
+          <div class="paywall-text">
+            <h2>Seu perfil está <span class="text-danger">invisível</span> para clientes</h2>
+            <p>Ative o Sistema Milhão para aparecer na vitrine, receber agendamentos e começar a faturar.</p>
+          </div>
+        </div>
+        <button class="btn-activate-premium" (click)="ativarPlano()">
+          <i class="ph ph-lightning"></i>
+          ATIVAR POR R$29,90/mês
+        </button>
+      </div>
+    </section>
+
+    <!-- Subscription Badge - ATIVO -->
+    <section *ngIf="statusPagamento === 'ATIVO'" class="subscription-badge-section">
+      <div class="subscription-badge">
+        <i class="ph-fill ph-seal-check"></i>
+        <span>Premium Ativo</span>
+        <span class="badge-sep">•</span>
+        <span class="badge-detail">Perfil visível para clientes</span>
+      </div>
+    </section>
+
+    <!-- Métricas -->
+    <section *ngIf="statusPagamento === 'ATIVO'" class="metrics-section">
+      <div class="metrics-grid">
+        
+        <div class="metric-card">
+          <div class="metric-icon-wrap blue">
+            <i class="ph-fill ph-chart-line-up"></i>
+          </div>
+          <div class="metric-body">
+            <span class="metric-label">Faturamento</span>
+            <span class="metric-value">{{ faturamentoMensal | currency:'BRL' }}</span>
+            <span class="metric-trend up"><i class="ph ph-trend-up"></i> +12% este mês</span>
+          </div>
         </div>
 
-        <div class="stat-card">
-          <h4>Últimos Clientes 💈</h4>
-          <ul class="client-list">
-            <li><span>Marcos - Degradê</span> <span>14:00</span></li>
-            <li><span>Felipe - Barba</span> <span>15:30</span></li>
-          </ul>
-          <button class="btn-neon">Ver Agenda Completa</button>
+        <div class="metric-card">
+          <div class="metric-icon-wrap purple">
+            <i class="ph-fill ph-tag"></i>
+          </div>
+          <div class="metric-body">
+            <span class="metric-label">Ticket Médio</span>
+            <span class="metric-value">{{ ticketMedio | currency:'BRL' }}</span>
+            <span class="metric-trend neutral">Preço base</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon-wrap green">
+            <i class="ph-fill ph-money"></i>
+          </div>
+          <div class="metric-body">
+            <span class="metric-label">Lucro Líquido</span>
+            <span class="metric-value accent">{{ lucroEstimado | currency:'BRL' }}</span>
+            <span class="metric-trend up"><i class="ph ph-trend-up"></i> -30% custos</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon-wrap orange">
+            <i class="ph-fill ph-users-three"></i>
+          </div>
+          <div class="metric-body">
+            <span class="metric-label">Clientes/Mês</span>
+            <span class="metric-value">30</span>
+            <span class="metric-trend neutral">Estimativa</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Gráfico -->
+    <section *ngIf="statusPagamento === 'ATIVO'" class="chart-section">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <i class="ph-fill ph-chart-bar"></i>
+            <h3>Faturamento Semanal</h3>
+          </div>
+          <div class="chart-legend">
+            <span class="legend-dot"></span> Receita (R$)
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas id="meuGrafico"></canvas>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Grid Inferior -->
+    <section *ngIf="statusPagamento === 'ATIVO'" class="bottom-section">
+      <div class="bottom-grid">
+        
+        <!-- Vitrine Online -->
+        <div class="section-card vitrine-card">
+          <div class="section-header">
+            <div class="section-title">
+              <i class="ph-fill ph-storefront"></i>
+              <h3>Sua Vitrine</h3>
+            </div>
+          </div>
+          <div class="vitrine-content">
+            <div class="link-display" *ngIf="nomeUsuario !== '...'">
+              <i class="ph ph-globe"></i>
+              <span>sistemamilhao.com/perfil/{{ nomeUsuario.split(' ').join('').toLowerCase() }}</span>
+            </div>
+            <div class="vitrine-actions">
+              <button class="btn-sm green" (click)="copiarLink()">
+                <i class="ph ph-copy"></i> Copiar
+              </button>
+              <button class="btn-sm outline">
+                <i class="ph ph-eye"></i> Visualizar
+              </button>
+            </div>
+            <p class="vitrine-hint">Coloque esse link na bio do Instagram para atrair clientes</p>
+          </div>
+        </div>
+
+        <!-- Últimos Clientes -->
+        <div class="section-card clients-card">
+          <div class="section-header">
+            <div class="section-title">
+              <i class="ph-fill ph-address-book"></i>
+              <h3>Últimos Clientes</h3>
+            </div>
+            <span class="badge-count">2</span>
+          </div>
+          <div class="client-list">
+            <div class="client-row">
+              <div class="client-avatar green">M</div>
+              <div class="client-info">
+                <span class="client-name">Marcos</span>
+                <span class="client-service">Degradê</span>
+              </div>
+              <span class="client-time">14:00</span>
+            </div>
+            <div class="client-row">
+              <div class="client-avatar purple">F</div>
+              <div class="client-info">
+                <span class="client-name">Felipe</span>
+                <span class="client-service">Barba</span>
+              </div>
+              <span class="client-time">15:30</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ações Rápidas -->
+        <div class="section-card actions-card">
+          <div class="section-header">
+            <div class="section-title">
+              <i class="ph-fill ph-lightning"></i>
+              <h3>Ações Rápidas</h3>
+            </div>
+          </div>
+          <div class="quick-actions">
+            <button class="action-btn">
+              <i class="ph ph-pencil-simple"></i>
+              <span>Editar Perfil</span>
+            </button>
+            <button class="action-btn">
+              <i class="ph ph-currency-dollar"></i>
+              <span>Alterar Preço</span>
+            </button>
+            <button class="action-btn">
+              <i class="ph ph-whatsapp-logo"></i>
+              <span>Testar Link</span>
+            </button>
+            <button class="action-btn">
+              <i class="ph ph-question"></i>
+              <span>Suporte</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 </div>

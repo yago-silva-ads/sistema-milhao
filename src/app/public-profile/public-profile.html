@@ -1,30 +1,41 @@
-<div class="public-container">
+<div class="public-wrapper">
+  
+  <div class="glow-blob-purple" style="top: -100px; right: -100px;"></div>
+  <div class="glow-blob-green" style="bottom: -100px; left: -100px;"></div>
+
   @if (profissional) {
-    <div class="profile-card">
-      <div class="header-visual"></div>
+    <div class="glass-card profile-card">
+      
+      <div class="header-visual">
+        <div class="avatar-circle">
+          <span>{{ profissional.nome.charAt(0).toUpperCase() }}</span>
+        </div>
+      </div>
 
-      <div class="info">
-        <h1>{{ profissional.nome }}</h1>
-        <p class="specialty">{{ profissional.servico || 'Profissional de Elite' }} 💈</p>
+      <div class="info-section">
+        <h1 class="profile-name">{{ profissional.nome }}</h1>
+        <div class="specialty-badge">{{ profissional.servico || 'Profissional de Elite' }} 💈</div>
 
-        <div class="price-badge">
-          <span>Corte a partir de</span>
-          <h2>{{ profissional.preco | currency: 'BRL' }}</h2>
+        <div class="price-container">
+          <span class="price-label">A partir de</span>
+          <h2 class="price-value">{{ profissional.preco | currency: 'BRL' }}</h2>
         </div>
 
         <p class="bio">
-          Especialista em serviços de alta qualidade. Agende agora sua transformação com o Sistema
-          Milhão!
+          Especialista em serviços de alta qualidade. Agende agora sua transformação.
         </p>
 
         <button (click)="irParaWhatsApp()" class="btn-whatsapp">
-          <span class="btn-subtitle">🚀 Fale comigo</span>
-          <span class="btn-title">Agendar pelo WhatsApp agora!</span>
+          <i class="ph-fill ph-whatsapp-logo wpp-icon"></i>
+          CHAMAR NO WHATSAPP
         </button>
       </div>
+
     </div>
 
-    <footer class="footer">Powered by <span>Sistema Milhão</span> 🚀</footer>
+    <footer class="public-footer">
+      Powered by <span class="brand-text">Sistema Milhão</span> 🚀
+    </footer>
   } @else {
     <div class="loading-screen">
       <div class="spinner"></div>

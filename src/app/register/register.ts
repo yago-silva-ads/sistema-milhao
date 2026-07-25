@@ -45,21 +45,22 @@ export class RegisterComponent implements OnInit {
 
       this.metaService.cadastrarCliente(this.cadastroForm.value).subscribe({
         next: (res) => {
-          alert('🚀 Cadastro realizado com sucesso! Verifique seu código no e-mail.');
-          
+          this.showToast('success', '🚀 Cadastro realizado!', 'Verifique o código no seu e-mail.');
+
           // 3. REDIRECIONAMENTO: Manda o cara para a tela de verificação
           // Passamos o e-mail via QueryParams para a tela /verify saber quem validar
-          this.router.navigate(['/verify'], { queryParams: { email: emailDigitado } });
-          
-          this.cadastroForm.reset(); 
+          setTimeout(() => {
+            this.router.navigate(['/verify'], { queryParams: { email: emailDigitado } });
+            this.cadastroForm.reset();
+          }, 1500);
         },
         error: (err) => {
           console.error(err);
-          alert('❌ Erro de conexão com o Java! Verifique se o IntelliJ está com o Play ligado.');
+          this.showToast('error', '❌ Erro de conexão', 'Verifique se o backend está rodando (IntelliJ Play).');
         }
       });
     } else {
-      alert('⚠️ Formulário Inválido! Verifique se o e-mail está certo e o WhatsApp tem 11 dígitos.');
+      this.showToast('error', '⚠️ Formulário inválido', 'Verifique e-mail e WhatsApp (11 dígitos).');
     }
   }
 
@@ -79,5 +80,23 @@ export class RegisterComponent implements OnInit {
         this.ngOnInit();
       },
     });
+  }
+
+  private showToast(type: 'success' | 'error', title: string, subtitle: string) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+      <span class="toast-icon">${type === 'success' ? '✓' : '✗'}</span>
+      <div class="toast-message">
+        <div class="toast-title">${title}</div>
+        <div class="toast-subtitle">${subtitle}</div>
+      </div>
+    `;
+    container.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 4000);
   }
 }
