@@ -1,6 +1,5 @@
-// Ambiente PRODUÇÃO (Railway)
-// ATUALIZAR quando tiver a URL do Railway
+// Ambiente PRODUÇÃO (Render)
 export const environment = {
   production: true,
-  apiUrl: 'https://sistema-milhao-backend.up.railway.app'
+  apiUrl: 'https://sistema-milhao-backend.onrender.com'
 };

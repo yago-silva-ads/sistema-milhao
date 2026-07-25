@@ -56,7 +56,12 @@ export class RegisterComponent implements OnInit {
         },
         error: (err) => {
           console.error(err);
-          this.showToast('error', '❌ Erro de conexão', 'Verifique se o backend está rodando (IntelliJ Play).');
+          if (err.status === 400) {
+            // Backend retornou erro de validação (email duplicado, etc)
+            this.showToast('error', '⚠️ Email já cadastrado', 'Esse e-mail já está em uso. Tente fazer login ou use outro e-mail.');
+          } else {
+            this.showToast('error', '❌ Erro de conexão', 'Verifique se o backend está rodando (IntelliJ Play).');
+          }
         }
       });
     } else {
